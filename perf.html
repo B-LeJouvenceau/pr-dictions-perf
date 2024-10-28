@@ -1,11 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Prédiction de Temps pour le Marathon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .submit-btn {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
-    <h1>Le site des perfs marathon !</h1>
+    <div class="container">
+        <h2>Prédiction de Temps pour le Marathon</h2>
+        <form id="marathonForm" onsubmit="return calculerPrediction()">
+            <div class="form-group">
+                <label for="Distance_prédire">Distance de la course à prédire (km):</label>
+                <input type="number" id="Distance_prédire" name="Distance_prédire" required>
+            </div>
+            <div class="form-group">
+                <label for="Performance_course">Performance sur la dernière course effectuée (min):</label>
+                <input type="number" id="Performance_course" name="Performance_course" required>
+            </div>
+            <div class="form-group">
+                <label for="distance_course">Distance de la dernière course (km):</label>
+                <input type="number" id="distance_course" name="distance_course" required>
+            </div>
+            <button type="submit" class="submit-btn">Calculer la Prédiction</button>
+        </form>
+        <p id="resultat" style="text-align: center; margin-top: 20px;"></p>
+    </div>
+
+    <script>
+        function calculerPrediction() {
+            // Récupération des valeurs du formulaire
+            const Distance_prédire = parseFloat(document.getElementById("Distance_prédire").value);
+            const Performance_course = parseFloat(document.getElementById("Performance_course").value);
+            const distance_course = parseFloat(document.getElementById("distance_course").value);
+
+            // Exemple de calcul simple pour la prédiction du marathon (à personnaliser)
+            let prediction = Performance_course * (Math.pow(Distance_prédire / distance_course, 1.06));
+
+            let heures = parseInt(prediction/60);
+            let minutes = parseInt(((prediction/60)-heures)*60);
+            let secondes = parseInt((prediction*60) - heures*3600 - minutes*60)
+
+            // Affichage du résultat
+            document.getElementById("resultat").innerText =
+                "Temps estimé pour le marathon: " + heures + ":" + minutes + ":" + secondes  ;
+
+            // Empêcher le rechargement de la page
+            return false;
+        }
+    </script>
 </body>
 </html>
