@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prédiction de Temps pour le Marathon</title>
@@ -48,6 +47,18 @@
         }
         .submit-btn:hover {
             background-color: #218838;
+        }
+                /* Mobile-specific styling */
+                @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+            .submit-btn, .form-group input {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
