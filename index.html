@@ -89,25 +89,38 @@
     const Distance_predire = parseFloat(document.getElementById("Distance_prédire").value);
     const distance_course = parseFloat(document.getElementById("distance_course").value);
 
-    // Récupérer la performance sous forme mm:ss
+    // Vérification des saisies numériques
+    if (isNaN(Distance_predire) || isNaN(distance_course)) {
+        document.getElementById("resultat").innerText =
+            "Veuillez saisir des valeurs numériques valides pour les distances.";
+        return;
+    }
+
+    // Lecture et vérification du format mm:ss
     const performance_str = document.getElementById("Performance_course").value;
     const parts = performance_str.split(':');
+    if (parts.length !== 2 || isNaN(parseInt(parts[0])) || isNaN(parseInt(parts[1]))) {
+        document.getElementById("resultat").innerText =
+            "Veuillez entrer la performance au format mm:ss (ex: 37:20).";
+        return;
+    }
+
     const minutes = parseInt(parts[0], 10);
     const secondes = parseInt(parts[1], 10);
-    // Convertir en minutes décimales
     const perf_course = minutes + (secondes / 60);
 
-    // Calcul de la prédiction (exemple)
+    // Calcul prédictif
     const prediction = perf_course * Math.pow(Distance_predire / distance_course, 1.06);
 
     const heures = Math.floor(prediction / 60);
     const mins = Math.floor(prediction % 60);
     const secs = Math.round((prediction * 60) % 60);
 
-    // Affichage du résultat
     document.getElementById("resultat").innerText =
-        "Temps estimé pour votre course : " + heures + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
-        }
+        "Temps estimé pour votre course : " + 
+        (heures < 10 ? "0" : "") + heures + ":" + 
+        (mins < 10 ? "0" : "") + mins + ":" + 
+        (secs < 10 ? "0" : "") + secs;}
 
     </script>
 </body>
