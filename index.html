@@ -86,28 +86,29 @@
 
     <script>
         function calculerPrediction() {
-            // Récupération des valeurs du formulaire
-            const Distance_prédire = parseFloat(document.getElementById("Distance_prédire").value);
-            const Performance_course = parseFloat(document.getElementById("Performance_course").value);
-            const distance_course = parseFloat(document.getElementById("distance_course").value);
-            let decimalPart = parseFloat(Performance_course.toString().split('.')[1]);
-            let conversion_sec = decimalPart/60
-            let perf_course = Performance_course-decimalPart + conversion_sec
+    const Distance_predire = parseFloat(document.getElementById("Distance_prédire").value);
+    const distance_course = parseFloat(document.getElementById("distance_course").value);
 
-            // Exemple de calcul simple pour la prédiction du marathon (à personnaliser)
-            let prediction = perf_course * (Math.pow(Distance_prédire / distance_course, 1.06));
+    // Récupérer la performance sous forme mm:ss
+    const performance_str = document.getElementById("Performance_course").value;
+    const parts = performance_str.split(':');
+    const minutes = parseInt(parts[0], 10);
+    const secondes = parseInt(parts[1], 10);
+    // Convertir en minutes décimales
+    const perf_course = minutes + (secondes / 60);
 
-            let heures = parseInt(prediction/60);
-            let minutes = parseInt(((prediction/60)-heures)*60);
-            let secondes = parseInt((prediction*60) - heures*3600 - minutes*60)
+    // Calcul de la prédiction (exemple)
+    const prediction = perf_course * Math.pow(Distance_predire / distance_course, 1.06);
 
-            // Affichage du résultat
-            document.getElementById("resultat").innerText =
-                "Temps estimé pour votre course : " + heures + ":" + minutes + ":" + secondes  ;
+    const heures = Math.floor(prediction / 60);
+    const mins = Math.floor(prediction % 60);
+    const secs = Math.round((prediction * 60) % 60);
 
-            // Empêcher le rechargement de la page
-            return false;
+    // Affichage du résultat
+    document.getElementById("resultat").innerText =
+        "Temps estimé pour votre course : " + heures + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
         }
+
     </script>
 </body>
 </html>
