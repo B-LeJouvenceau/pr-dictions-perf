@@ -90,9 +90,12 @@
             const Distance_prédire = parseFloat(document.getElementById("Distance_prédire").value);
             const Performance_course = parseFloat(document.getElementById("Performance_course").value);
             const distance_course = parseFloat(document.getElementById("distance_course").value);
+            let decimalPart = parseFloat(Performance_course.toString().split('.')[1]);
+            let conversion_sec = decimalPart/60
+            let perf_course = Performance_course-decimalPart + conversion_sec
 
             // Exemple de calcul simple pour la prédiction du marathon (à personnaliser)
-            let prediction = Performance_course * (Math.pow(Distance_prédire / distance_course, 1.06));
+            let prediction = perf_course * (Math.pow(Distance_prédire / distance_course, 1.06));
 
             let heures = parseInt(prediction/60);
             let minutes = parseInt(((prediction/60)-heures)*60);
