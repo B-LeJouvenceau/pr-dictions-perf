@@ -69,15 +69,15 @@
         <form id="marathonForm" onsubmit="return calculerPrediction()">
             <div class="form-group">
                 <label for="Distance_prédire">Distance de la course à prédire (km):</label>
-                <input type="number" id="Distance_prédire" name="Distance_prédire" required>
+                <input type="float" id="Distance_prédire" name="Distance_prédire" required>
             </div>
             <div class="form-group">
                 <label for="distance_course">Distance de la dernière course (km):</label>
-                <input type="number" id="distance_course" name="distance_course" required>
+                <input type="float" id="distance_course" name="distance_course" required>
             </div>
              <div class="form-group">
                 <label for="Performance_course">Performance sur la dernière course effectuée (min):</label>
-                <input type="number" id="Performance_course" name="Performance_course" required>
+                <input type="float" id="Performance_course" name="Performance_course" required>
             </div>
             <button type="submit" class="submit-btn">Calculer la Prédiction</button>
         </form>
