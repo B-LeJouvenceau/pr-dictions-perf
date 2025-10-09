@@ -1,127 +1,127 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prédiction de temps pour votre course</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            background-color: #fff;
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .submit-btn {
-            background-color: #28a745;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-        }
-        .submit-btn:hover {
-            background-color: #218838;
-        }
-                /* Mobile-specific styling */
-                @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            h2 {
-                font-size: 1.3rem;
-            }
-            .submit-btn, .form-group input {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prédiction de temps pour votre course</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background-color: #fff;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .btn-style {
+      background: linear-gradient(45deg, #56ab2f, #a8e063);
+      border: none;
+      color: white;
+      padding: 12px 28px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 30px;
+      box-shadow: 0 6px 12px rgba(86, 171, 47, 0.6);
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+    }
+    .btn-style:hover {
+      background: linear-gradient(45deg, #a8e063, #56ab2f);
+      box-shadow: 0 8px 16px rgba(168, 224, 99, 0.8);
+    }
+    .btn-style:active {
+      transform: scale(0.98);
+      box-shadow: 0 4px 8px rgba(86, 171, 47, 0.8);
+    }
+    @media (max-width: 600px) {
+      .container { padding: 15px; }
+      h2 { font-size: 1.3rem; }
+      .btn-style, .form-group input { font-size: 0.9rem; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <img src="https://i.pinimg.com/originals/a0/d3/a2/a0d3a23850d0efa843ac22dd5c16a0a7.jpg" alt="Course Image" style="width:40%; border-radius: 8px;">
-        <h2>Prédiction de Temps pour votre course</h2>
-        <form id="marathonForm" onsubmit="return calculerPrediction()">
-            <div class="form-group">
-                <label for="Distance_prédire">Distance de la course à prédire (km):</label>
-                <input type="float" id="Distance_prédire" name="Distance_prédire" required>
-            </div>
-            <div class="form-group">
-                <label for="distance_course">Distance de la dernière course (km):</label>
-                <input type="float" id="distance_course" name="distance_course" required>
-            </div>
-             <div class="form-group">
-                <label for="Performance_course">Performance sur la dernière course effectuée (min):</label>
-                <input type="float" id="Performance_course" name="Performance_course" required>
-            </div>
-            <button type="submit" class="submit-btn">Calculer la Prédiction</button>
-        </form>
-        <p id="resultat" style="text-align: center; margin-top: 20px;"></p>
-    </div>
+  <div class="container">
+    <h2>Prédiction de Temps pour votre course</h2>
+    <form id="marathonForm">
+      <div class="form-group">
+        <label for="Distance_prédire">Distance de la course à prédire (km):</label>
+        <input type="number" step="0.01" id="Distance_prédire" name="Distance_prédire" required>
+      </div>
+      <div class="form-group">
+        <label for="distance_course">Distance de la dernière course (km):</label>
+        <input type="number" step="0.01" id="distance_course" name="distance_course" required>
+      </div>
+      <div class="form-group">
+        <label for="Performance_course">Performance sur la dernière course (mm:ss):</label>
+        <input type="text" id="Performance_course" name="Performance_course" placeholder="ex: 37:20" required>
+      </div>
+      <!-- type="button" empêche le rechargement automatique -->
+      <button type="button" class="btn-style" onclick="calculerPrediction()">Calculer la Prédiction</button>
+    </form>
+    <p id="resultat" style="text-align: center; margin-top: 20px; font-weight: bold;"></p>
+  </div>
 
-    <script>
-        function calculerPrediction() {
-    const Distance_predire = parseFloat(document.getElementById("Distance_prédire").value);
-    const distance_course = parseFloat(document.getElementById("distance_course").value);
+  <script>
+    function calculerPrediction() {
+      const Distance_predire = parseFloat(document.getElementById("Distance_prédire").value);
+      const distance_course = parseFloat(document.getElementById("distance_course").value);
+      const performance_str = document.getElementById("Performance_course").value.trim();
+      const resultat = document.getElementById("resultat");
 
-    // Vérification des saisies numériques
-    if (isNaN(Distance_predire) || isNaN(distance_course)) {
-        document.getElementById("resultat").innerText =
-            "Veuillez saisir des valeurs numériques valides pour les distances.";
+      // Vérification des saisies
+      if (isNaN(Distance_predire) || isNaN(distance_course)) {
+        resultat.innerText = "Veuillez saisir des valeurs numériques valides pour les distances.";
         return;
-    }
+      }
 
-    // Lecture et vérification du format mm:ss
-    const performance_str = document.getElementById("Performance_course").value;
-    const parts = performance_str.split(':');
-    if (parts.length !== 2 || isNaN(parseInt(parts[0])) || isNaN(parseInt(parts[1]))) {
-        document.getElementById("resultat").innerText =
-            "Veuillez entrer la performance au format mm:ss (ex: 37:20).";
+      // Vérif format mm:ss
+      const parts = performance_str.split(':');
+      if (parts.length !== 2 || isNaN(parts[0]) || isNaN(parts[1])) {
+        resultat.innerText = "Veuillez entrer la performance au format mm:ss (ex: 37:20).";
         return;
+      }
+
+      const minutes = parseInt(parts[0], 10);
+      const secondes = parseInt(parts[1], 10);
+      const perf_course = minutes + (secondes / 60);
+
+      // Calcul de la prédiction
+      const prediction = perf_course * Math.pow(Distance_predire / distance_course, 1.06);
+      const heures = Math.floor(prediction / 60);
+      const mins = Math.floor(prediction % 60);
+      const secs = Math.round((prediction * 60) % 60);
+
+      resultat.innerText =
+        "Temps estimé pour votre course : " +
+        (heures < 10 ? "0" : "") + heures + ":" +
+        (mins < 10 ? "0" : "") + mins + ":" +
+        (secs < 10 ? "0" : "") + secs;
     }
-
-    const minutes = parseInt(parts[0], 10);
-    const secondes = parseInt(parts[1], 10);
-    const perf_course = minutes + (secondes / 60);
-
-    // Calcul prédictif
-    const prediction = perf_course * Math.pow(Distance_predire / distance_course, 1.06);
-
-    const heures = Math.floor(prediction / 60);
-    const mins = Math.floor(prediction % 60);
-    const secs = Math.round((prediction * 60) % 60);
-
-    document.getElementById("resultat").innerText =
-        "Temps estimé pour votre course : " + 
-        (heures < 10 ? "0" : "") + heures + ":" + 
-        (mins < 10 ? "0" : "") + mins + ":" + 
-        (secs < 10 ? "0" : "") + secs;}
-
-    </script>
+  </script>
 </body>
 </html>
+
